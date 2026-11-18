@@ -1,0 +1,126 @@
+================================================================================
+Strings, interpolation and escapes
+================================================================================
+
+a := "x = «x, ⟨base: 16⟩» \n ««"
+b := "http://example.com /* not a comment */"
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (variable_declaration
+    (identifier)
+    (string
+      (string_content)
+      (interpolation
+        (identifier)
+        (literal
+          (named_argument
+            (identifier)
+            (number))))
+      (string_content)
+      (escape_sequence)
+      (string_content)
+      (escape_sequence)))
+  (variable_declaration
+    (identifier)
+    (string
+      (string_content))))
+
+================================================================================
+Raw strings
+================================================================================
+
+a := #"{"id":«id»,"path":"C:\temp"}"#
+b := ##"a "# b"##
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (variable_declaration
+    (identifier)
+    (raw_string
+      (raw_string_content)
+      (interpolation
+        (identifier))
+      (raw_string_content)))
+  (variable_declaration
+    (identifier)
+    (raw_string
+      (raw_string_content))))
+
+================================================================================
+Here-strings
+================================================================================
+
+SHADER :: #"VERTEX_GLSL
+void main() { }
+VERTEX_GLSL"#
+TEXT :: #"END
+line «n»
+  END"#
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (constant_declaration
+    (identifier)
+    (here_string
+      (here_string_start)
+      (here_string_content)))
+  (constant_declaration
+    (identifier)
+    (here_string
+      (here_string_start)
+      (here_string_content)
+      (interpolation
+        (identifier))
+      (here_string_content))))
+
+================================================================================
+Casts and types as expressions
+================================================================================
+
+x := u64'y + 1
+p := ^u8'data
+v := [] u8'text
+w: [4] Wide.u8x16
+h: ^[..] u8
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (variable_declaration
+    (identifier)
+    (binary_expression
+      (cast_expression
+        (identifier)
+        (identifier))
+      (number)))
+  (variable_declaration
+    (identifier)
+    (cast_expression
+      (unary_expression
+        (identifier))
+      (identifier)))
+  (variable_declaration
+    (identifier)
+    (cast_expression
+      (unary_expression
+        (array_type_prefix)
+        (identifier))
+      (identifier)))
+  (variable_declaration
+    (identifier)
+    (unary_expression
+      (array_type_prefix
+        (number))
+      (member_expression
+        (identifier)
+        (identifier))))
+  (variable_declaration
+    (identifier)
+    (unary_expression
+      (unary_expression
+        (array_type_prefix)
+        (identifier)))))

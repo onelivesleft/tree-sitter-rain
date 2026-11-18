@@ -1,0 +1,320 @@
+================================================================================
+Statements end at a line's end, but not inside brackets or after an operator
+================================================================================
+
+x := 1
+y := x +
+    2
+z := add(1,
+    2)
+w := 3; v := 4
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (variable_declaration
+    (identifier)
+    (number))
+  (variable_declaration
+    (identifier)
+    (binary_expression
+      (identifier)
+      (number)))
+  (variable_declaration
+    (identifier)
+    (call_expression
+      (identifier)
+      (arguments
+        (number)
+        (number))))
+  (variable_declaration
+    (identifier)
+    (number))
+  (variable_declaration
+    (identifier)
+    (number)))
+
+================================================================================
+else on the next line goes on the if
+================================================================================
+
+if a {
+    b()
+}
+else if c {
+    d()
+} else {
+    e()
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (if_statement
+    (identifier)
+    (block
+      (expression_statement
+        (call_expression
+          (identifier)
+          (arguments))))
+    (if_statement
+      (identifier)
+      (block
+        (expression_statement
+          (call_expression
+            (identifier)
+            (arguments))))
+      (block
+        (expression_statement
+          (call_expression
+            (identifier)
+            (arguments)))))))
+
+================================================================================
+An if's statement after then, or on the next line
+================================================================================
+
+if done then return 1
+if n < 0
+    fail: negative
+for v: values
+    total += v
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (if_statement
+    (identifier)
+    (return_statement
+      (number)))
+  (if_statement
+    (binary_expression
+      (identifier)
+      (number))
+    (fail_statement
+      (identifier)))
+  (for_statement
+    (identifier)
+    (identifier)
+    (assignment
+      (identifier)
+      (identifier))))
+
+================================================================================
+program, module and shader are names too
+================================================================================
+
+My_Game :: program {
+    executable: "game"
+    release { mode: .RELEASE }
+}
+program := linked(VERTEX, FRAGMENT)
+module: Module_Handle
+x64 :: module {
+    #import Wide
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (constant_declaration
+    (identifier)
+    (program_type
+      (block
+        (variable_declaration
+          (identifier)
+          (string
+            (string_content)))
+        (preset
+          (identifier)
+          (block
+            (variable_declaration
+              (identifier)
+              (enum_value
+                (identifier))))))))
+  (variable_declaration
+    (identifier)
+    (call_expression
+      (identifier)
+      (arguments
+        (identifier)
+        (identifier))))
+  (variable_declaration
+    (identifier)
+    (identifier))
+  (constant_declaration
+    (identifier)
+    (module_type
+      (block
+        (expression_statement
+          (import
+            (identifier)))))))
+
+================================================================================
+A switch, its cases its body
+================================================================================
+
+if x := f() is {
+    case absent:
+    case os_error: report(os_error)
+} else {
+    use(x)
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (if_statement
+    (switch
+      (identifier)
+      (call_expression
+        (identifier)
+        (arguments))
+      (case_block
+        (case_clause
+          (identifier))
+        (case_clause
+          (identifier)
+          (expression_statement
+            (call_expression
+              (identifier)
+              (arguments
+                (identifier)))))))
+    (block
+      (expression_statement
+        (call_expression
+          (identifier)
+          (arguments
+            (identifier)))))))
+
+================================================================================
+Procedures, structs and enums
+================================================================================
+
+add :: (a: i64, b: i64 -> i64) #pure { return a + b }
+read :: (path: string -> bytes: [] u8) [absent, os_error: u32]
+each :: #for (list: *List -> item: ^T) { yield ^node.value #remove { drop(node) } }
+Point :: struct (T: Type) #c { x: T; y: T = 0 #align(8) ⟦json: "y"⟧ }
+Level :: enum u8 { LOW; HIGH }
+operator+ :: (a: Money, b: Money -> Money) { return ⟨a.cents + b.cents⟩ }
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (constant_declaration
+    (identifier)
+    (procedure
+      (parameters
+        (parameter
+          (identifier)
+          (identifier))
+        (parameter
+          (identifier)
+          (identifier))
+        (result
+          (identifier)))
+      (directive
+        (directive_name))
+      (block
+        (return_statement
+          (binary_expression
+            (identifier)
+            (identifier))))))
+  (constant_declaration
+    (identifier)
+    (procedure
+      (parameters
+        (parameter
+          (identifier)
+          (identifier))
+        (result
+          (identifier)
+          (unary_expression
+            (array_type_prefix)
+            (identifier))))
+      (fail_states
+        (fail_state
+          (identifier))
+        (fail_state
+          (identifier)
+          (identifier)))))
+  (constant_declaration
+    (identifier)
+    (procedure
+      (parameters
+        (parameter
+          (identifier)
+          (unary_expression
+            (identifier)))
+        (result
+          (identifier)
+          (unary_expression
+            (identifier))))
+      (block
+        (yield_statement
+          (unary_expression
+            (member_expression
+              (identifier)
+              (identifier)))
+          (block
+            (expression_statement
+              (call_expression
+                (identifier)
+                (arguments
+                  (identifier)))))))))
+  (constant_declaration
+    (identifier)
+    (struct_type
+      (parameters
+        (parameter
+          (identifier)
+          (identifier)))
+      (c_directive)
+      (block
+        (variable_declaration
+          (identifier)
+          (identifier))
+        (variable_declaration
+          (identifier)
+          (identifier)
+          (number)
+          (directive
+            (directive_name)
+            (arguments
+              (number)))
+          (notes
+            (named_argument
+              (identifier)
+              (string
+                (string_content))))))))
+  (constant_declaration
+    (identifier)
+    (enum_type
+      (identifier)
+      (block
+        (expression_statement
+          (identifier))
+        (expression_statement
+          (identifier)))))
+  (constant_declaration
+    (operator_name)
+    (procedure
+      (parameters
+        (parameter
+          (identifier)
+          (identifier))
+        (parameter
+          (identifier)
+          (identifier))
+        (result
+          (identifier)))
+      (block
+        (return_statement
+          (literal
+            (binary_expression
+              (member_expression
+                (identifier)
+                (identifier))
+              (member_expression
+                (identifier)
+                (identifier)))))))))
