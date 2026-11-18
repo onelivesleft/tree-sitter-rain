@@ -1,0 +1,13 @@
+id = "rain"
+name = "'rain"
+description = "'rain: highlighting, outline, brackets, indents and text objects, by tree-sitter-rain"
+version = "0.1.0"
+schema_version = 1
+authors = ["onelivesleft"]
+repository = "https://github.com/onelivesleft/tree-sitter-rain"
+
+# The grammar: this repository, at a commit (rev). While it's a dev
+# extension, the folder it's in; once pushed, its GitHub URL does as well.
+[grammars.rain]
+repository = "file:///C:/repos/tree-sitter-rain"
+rev = "f36e959c7f424222ff03f98e9ebd5eccba440062"
