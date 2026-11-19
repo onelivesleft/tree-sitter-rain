@@ -1,5 +1,10 @@
 ; A here-string whose name ends with a language's (#"GLSL, #"VERTEX_HLSL,
 ; #"QUERY_SQL) is that language. Its pieces between interpolations are one.
+;
+; Not rain's own (#"RAIN), as Neovim's and Helix's are: Zed (1.29) loads a
+; language's injected languages as it loads it, so rain injecting rain loads
+; it again and again, its memory growing by gigabytes a minute with nothing
+; highlighted.
 
 ((here_string
   (here_string_start) @_start
@@ -83,11 +88,4 @@
   (here_string_content) @injection.content)
   (#match? @_start "PYTHON\\s*$")
   (#set! injection.language "python")
-  (#set! injection.combined))
-
-((here_string
-  (here_string_start) @_start
-  (here_string_content) @injection.content)
-  (#match? @_start "RAIN\\s*$")
-  (#set! injection.language "rain")
   (#set! injection.combined))

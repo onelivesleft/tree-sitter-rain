@@ -7,3 +7,6 @@
 build/
 target/
 node_modules/
+# What Zed's "install dev extension" builds beside the extension: the grammar's
+# checkout and its wasm.
+zed/grammars/
