@@ -86,3 +86,14 @@ to Helix's `runtime/queries/rain`.
 choose that folder. Its grammar is this repository at the commit
 `zed/extension.toml` names (`rev`), from the folder its `repository` says:
 after changing the grammar, commit, and put the new commit in `rev`.
+
+Besides the grammar's queries, it has runnables (a ▶ beside each `#test`
+and `main`), tasks (run, build, test, `-check:all`), and the compiler's
+language server, `rain -lsp` (errors as you type with quick fixes, go to
+definition, hover, find references), which [zed/src/lib.rs](zed/src/lib.rs)
+starts. That code is Rust, so installing the dev extension needs rustup. It
+uses `rain` from the PATH, or the compiler Zed's settings name:
+
+```json
+"lsp": { "rain": { "binary": { "path": "C:/rain/build/rain.exe" } } }
+```

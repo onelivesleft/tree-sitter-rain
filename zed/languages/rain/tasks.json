@@ -1,0 +1,34 @@
+[
+  {
+    "label": "rain: test $ZED_CUSTOM_test_name",
+    "command": "rain",
+    "args": ["-test:$ZED_FILE", "-only:$ZED_CUSTOM_test_name"],
+    "cwd": "$ZED_DIRNAME",
+    "tags": ["rain-test"]
+  },
+  {
+    "label": "rain: run $ZED_STEM",
+    "command": "rain",
+    "args": ["-run", "$ZED_FILE"],
+    "cwd": "$ZED_DIRNAME",
+    "tags": ["rain-main"]
+  },
+  {
+    "label": "rain: build $ZED_STEM",
+    "command": "rain",
+    "args": ["$ZED_FILE"],
+    "cwd": "$ZED_DIRNAME"
+  },
+  {
+    "label": "rain: test $ZED_STEM",
+    "command": "rain",
+    "args": ["-test:$ZED_FILE"],
+    "cwd": "$ZED_DIRNAME"
+  },
+  {
+    "label": "rain: check all of $ZED_STEM",
+    "command": "rain",
+    "args": ["-check:all", "$ZED_FILE"],
+    "cwd": "$ZED_DIRNAME"
+  }
+]

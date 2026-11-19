@@ -1,6 +1,6 @@
 id = "rain"
 name = "'rain"
-description = "'rain: highlighting, outline, brackets, indents and text objects, by tree-sitter-rain"
+description = "'rain: highlighting, outline, brackets, indents, text objects, runnable tests (by tree-sitter-rain), and the compiler's language server"
 version = "0.1.0"
 schema_version = 1
 authors = ["onelivesleft"]
@@ -11,3 +11,8 @@ repository = "https://github.com/onelivesleft/tree-sitter-rain"
 [grammars.rain]
 repository = "file:///C:/repos/tree-sitter-rain"
 rev = "f36e959c7f424222ff03f98e9ebd5eccba440062"
+
+# The compiler's language server, rain -lsp, started by src/lib.rs.
+[language_servers.rain]
+name = "rain"
+languages = ["Rain"]
