@@ -5,7 +5,7 @@
 //
 //   "lsp": { "rain": { "binary": { "path": "C:/rain/build/rain.exe" } } }
 //
-// (arguments given there are used in place of -lsp).
+// (arguments given there, if any, are used in place of -lsp).
 
 use zed_extension_api::{self as zed, settings::LspSettings, LanguageServerId, Result};
 
@@ -21,7 +21,8 @@ impl zed::Extension for RainExtension {
             .ok()
             .and_then(|settings| settings.binary);
         let path = binary.as_ref().and_then(|b| b.path.clone());
-        let arguments = binary.as_ref().and_then(|b| b.arguments.clone());
+        // (a binary's settings give an empty list when they name no arguments)
+        let arguments = binary.as_ref().and_then(|b| b.arguments.clone()).filter(|a| !a.is_empty());
         let env = binary.as_ref().and_then(|b| b.env.clone()).map(|e| e.into_iter().collect()).unwrap_or_default();
         let command = match path {
             Some(path) => path,
