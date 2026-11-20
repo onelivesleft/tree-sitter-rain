@@ -10,7 +10,7 @@ repository = "https://github.com/onelivesleft/tree-sitter-rain"
 # extension, the folder it's in; once pushed, its GitHub URL does as well.
 [grammars.rain]
 repository = "file:///C:/repos/tree-sitter-rain"
-rev = "f36e959c7f424222ff03f98e9ebd5eccba440062"
+rev = "8555c3532ea185d7437bf1450a36effbfb77a026"
 
 # The compiler's language server, rain -lsp, started by src/lib.rs.
 [language_servers.rain]
