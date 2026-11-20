@@ -60,7 +60,7 @@
 
 (directive_name) @preproc
 [
-  "#if" "#elseif" "#else" "#unroll" "#with" "#for" "#signature" "#import"
+  "#if" "#elseif" "#else" "#unroll" "#with" "#inline" "#for" "#signature" "#import"
   "#remove" "#libc" "#foreign" "#c"
 ] @preproc
 (global) @preproc

@@ -37,7 +37,7 @@
 ["module" "program" "shader"] @keyword.storage.modifier
 
 [
-  "#if" "#elseif" "#else" "#unroll" "#with" "#for" "#signature" "#import"
+  "#if" "#elseif" "#else" "#unroll" "#with" "#inline" "#for" "#signature" "#import"
   "#remove" "#libc" "#foreign" "#c"
 ] @keyword.directive
 (directive_name) @keyword.directive

@@ -83,7 +83,7 @@
 
 (directive_name) @keyword.directive
 [
-  "#if" "#elseif" "#else" "#unroll" "#with" "#for" "#signature" "#import"
+  "#if" "#elseif" "#else" "#unroll" "#with" "#inline" "#for" "#signature" "#import"
   "#remove" "#libc" "#foreign" "#c"
 ] @keyword.directive
 (global) @keyword.directive

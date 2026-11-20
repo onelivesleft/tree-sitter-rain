@@ -1783,6 +1783,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "inline_expression"
+        },
+        {
+          "type": "SYMBOL",
           "name": "_primary"
         }
       ]
@@ -2239,6 +2243,27 @@
           {
             "type": "SYMBOL",
             "name": "_expression"
+          }
+        ]
+      }
+    },
+    "inline_expression": {
+      "type": "PREC",
+      "value": 8,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "#inline"
+          },
+          {
+            "type": "FIELD",
+            "name": "call",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_expression"
+            }
           }
         ]
       }

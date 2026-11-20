@@ -258,6 +258,7 @@ module.exports = grammar({
       $.unary_expression,
       $.cast_expression,
       $.arena_expression,
+      $.inline_expression,
       $._primary,
     ),
 
@@ -293,6 +294,9 @@ module.exports = grammar({
     )),
 
     arena_expression: $ => prec(PREC.unary, seq($.arena, $._expression)),
+
+    // #inline f(x): the call's callee's body in its place
+    inline_expression: $ => prec(PREC.unary, seq('#inline', field('call', $._expression))),
 
     _primary: $ => choice(
       $.identifier,

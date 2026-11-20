@@ -60,6 +60,10 @@
         "named": true
       },
       {
+        "type": "inline_expression",
+        "named": true
+      },
+      {
         "type": "literal",
         "named": true
       },
@@ -1735,6 +1739,22 @@
     }
   },
   {
+    "type": "inline_expression",
+    "named": true,
+    "fields": {
+      "call": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "_expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "interpolation",
     "named": true,
     "fields": {
@@ -3003,6 +3023,10 @@
   },
   {
     "type": "#import",
+    "named": false
+  },
+  {
+    "type": "#inline",
     "named": false
   },
   {
