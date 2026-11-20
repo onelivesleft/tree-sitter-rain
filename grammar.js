@@ -120,6 +120,8 @@ module.exports = grammar({
       choice(
         seq(':=', field('value', $._value)),
         seq(':', field('type', $._expression), optional(seq('=', field('value', $._value)))),
+        // (a shader's targets: .GLSL_430, .SPIRV, the values it's made for)
+        seq(':', field('type', $._expression), repeat1(seq(',', field('type', $._expression)))),
       ),
       repeat($.directive),
       optional($.notes),
@@ -131,7 +133,8 @@ module.exports = grammar({
       field('right', $._value),
     )),
 
-    expression_statement: $ => prec.right(seq($._expression, repeat($.directive))),
+    // (a union's variant with no value is one too, with its notes: generate ⟦default⟧)
+    expression_statement: $ => prec.right(seq($._expression, repeat($.directive), optional($.notes))),
 
     // What a declaration, an assignment or a return can be given: an
     // expression, or an if or a block whose way through gives the value.
@@ -446,7 +449,8 @@ module.exports = grammar({
 
     program_type: $ => seq(optional('#libc'), alias($._program_keyword, 'program'), field('body', $.block)),
 
-    shader_type: $ => seq(alias($._shader_keyword, 'shader'), field('body', $.block)),
+    // shader { vertex: place; fragment: shade }, shader(LIGHTS: i64 = 4) { ... }
+    shader_type: $ => seq(alias($._shader_keyword, 'shader'), optional(field('parameters', $.parameters)), field('body', $.block)),
 
     // #import Name, #import Name(PARAMETER: value), as a statement or a
     // named import's value.

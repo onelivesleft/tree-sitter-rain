@@ -85,7 +85,7 @@ static bool is_name(int32_t c) { return is_name_start(c) || (c >= '0' && c <= '9
 
 // program, module and shader are names too (program := ..., module: Handle):
 // each is the keyword only where its type begins, the word then a { (or a
-// module's parameters' ().
+// module's or a shader's parameters' ().
 static bool scan_keyword(TSLexer *lexer, const char *word, bool parameters) {
   for (const char *c = word; *c; c++) {
     if (lexer->lookahead != *c) { return false; }
@@ -303,7 +303,7 @@ bool tree_sitter_rain_external_scanner_scan(void *payload, TSLexer *lexer, const
     lexer->result_symbol = MODULE_KEYWORD;
     return true;
   }
-  if (lexer->lookahead == 's' && valid[SHADER_KEYWORD] && scan_keyword(lexer, "shader", false)) {
+  if (lexer->lookahead == 's' && valid[SHADER_KEYWORD] && scan_keyword(lexer, "shader", true)) {   // (shader(LIGHTS: i64 = 4) { ... } has parameters)
     lexer->result_symbol = SHADER_KEYWORD;
     return true;
   }

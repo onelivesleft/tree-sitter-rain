@@ -1254,6 +1254,10 @@
         {
           "type": "_expression",
           "named": true
+        },
+        {
+          "type": "notes",
+          "named": true
         }
       ]
     }
@@ -2458,6 +2462,16 @@
             "named": true
           }
         ]
+      },
+      "parameters": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "parameters",
+            "named": true
+          }
+        ]
       }
     }
   },
@@ -2792,7 +2806,7 @@
         ]
       },
       "type": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
