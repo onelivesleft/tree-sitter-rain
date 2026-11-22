@@ -491,7 +491,8 @@ module.exports = grammar({
 
     escape_sequence: _ => token.immediate(choice(
       /\\x[0-9A-Fa-f]{2}/,
-      /\\[^x]/,
+      /\\u\{[0-9A-Fa-f]{1,6}\}/,
+      /\\[^xu]/,
       '««',
     )),
 

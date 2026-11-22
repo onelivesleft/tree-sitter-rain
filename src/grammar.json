@@ -4265,7 +4265,11 @@
           },
           {
             "type": "PATTERN",
-            "value": "\\\\[^x]"
+            "value": "\\\\u\\{[0-9A-Fa-f]{1,6}\\}"
+          },
+          {
+            "type": "PATTERN",
+            "value": "\\\\[^xu]"
           },
           {
             "type": "STRING",
