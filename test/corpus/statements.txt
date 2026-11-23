@@ -340,3 +340,51 @@ Set :: enum flags [2] u64 { MDI; TABLER }
           (identifier))
         (expression_statement
           (identifier))))))
+
+================================================================================
+An interface, and a module that implements it
+================================================================================
+
+Renderer :: interface {
+    Canvas :: struct { size: i64 }
+    draw :: (canvas: *Canvas) #optional
+}
+
+Draw_GL :: module implements Draw_Renderer.Renderer {
+    #import Draw_Renderer
+}
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (constant_declaration
+    (identifier)
+    (interface_type
+      (block
+        (constant_declaration
+          (identifier)
+          (struct_type
+            (block
+              (variable_declaration
+                (identifier)
+                (identifier)))))
+        (constant_declaration
+          (identifier)
+          (procedure
+            (parameters
+              (parameter
+                (identifier)
+                (unary_expression
+                  (identifier))))
+            (directive
+              (directive_name)))))))
+  (constant_declaration
+    (identifier)
+    (module_type
+      (member_expression
+        (identifier)
+        (identifier))
+      (block
+        (expression_statement
+          (import
+            (identifier)))))))

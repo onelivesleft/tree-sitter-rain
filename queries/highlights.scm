@@ -97,7 +97,7 @@
 ["break" "continue" "defer"] @keyword
 ["and" "or" "in"] @keyword.operator
 ["struct" "union" "enum" "flags"] @keyword.type
-["module" "program" "shader"] @keyword.modifier
+["module" "program" "shader" "interface" "implements"] @keyword.modifier
 
 [(true) (false)] @boolean
 (null) @constant.builtin

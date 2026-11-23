@@ -69,7 +69,7 @@
 [
   "if" "else" "then" "case" "is" "not" "while" "for" "loop" "return" "yield"
   "fail" "break" "continue" "defer" "and" "or" "in" "struct" "union" "enum"
-  "flags" "module" "program" "shader"
+  "flags" "module" "program" "shader" "interface" "implements"
 ] @keyword
 
 [(true) (false)] @boolean

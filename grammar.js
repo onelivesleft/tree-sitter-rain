@@ -39,6 +39,7 @@ module.exports = grammar({
     $._program_keyword,
     $._module_keyword,
     $._shader_keyword,
+    $._interface_keyword,
     $.string_content,
     $._error_sentinel,
   ],
@@ -324,6 +325,7 @@ module.exports = grammar({
       $.module_type,
       $.program_type,
       $.shader_type,
+      $.interface_type,
       $.directive,
       $.import,
       $.count,
@@ -447,8 +449,12 @@ module.exports = grammar({
       optional('#libc'),
       alias($._module_keyword, 'module'),
       optional(field('parameters', $.parameters)),
+      optional(seq('implements', sep1(field('interface', $._expression), ','))),
       field('body', $.block),
     )),
+
+    // interface { ... }: what a module that implements it declares ('rain's TODO 99)
+    interface_type: $ => seq(alias($._interface_keyword, 'interface'), field('body', $.block)),
 
     program_type: $ => seq(optional('#libc'), alias($._program_keyword, 'program'), field('body', $.block)),
 

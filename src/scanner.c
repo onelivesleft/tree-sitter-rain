@@ -31,6 +31,7 @@ enum TokenType {
   PROGRAM_KEYWORD,
   MODULE_KEYWORD,
   SHADER_KEYWORD,
+  INTERFACE_KEYWORD,
   STRING_CONTENT,
   ERROR_SENTINEL,
 };
@@ -94,7 +95,16 @@ static bool scan_keyword(TSLexer *lexer, const char *word, bool parameters) {
   if (is_name(lexer->lookahead)) { return false; }
   lexer->mark_end(lexer);
   while (lexer->lookahead == ' ' || lexer->lookahead == '\t') { advance(lexer); }
-  return lexer->lookahead == '{' || (parameters && lexer->lookahead == '(');
+  if (lexer->lookahead == '{' || (parameters && lexer->lookahead == '(')) { return true; }
+  // module implements Draw_Renderer.Renderer { ... } (a module's parameters
+  // may come between, which the ( above takes)
+  if (!parameters) { return false; }
+  const char *implements = "implements";
+  for (const char *c = implements; *c; c++) {
+    if (lexer->lookahead != *c) { return false; }
+    advance(lexer);
+  }
+  return !is_name(lexer->lookahead);
 }
 
 // After a line's end: does the next line go on with else, #else or #elseif?
@@ -305,6 +315,10 @@ bool tree_sitter_rain_external_scanner_scan(void *payload, TSLexer *lexer, const
   }
   if (lexer->lookahead == 's' && valid[SHADER_KEYWORD] && scan_keyword(lexer, "shader", true)) {   // (shader(LIGHTS: i64 = 4) { ... } has parameters)
     lexer->result_symbol = SHADER_KEYWORD;
+    return true;
+  }
+  if (lexer->lookahead == 'i' && valid[INTERFACE_KEYWORD] && scan_keyword(lexer, "interface", false)) {
+    lexer->result_symbol = INTERFACE_KEYWORD;
     return true;
   }
 

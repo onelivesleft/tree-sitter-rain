@@ -64,6 +64,10 @@
         "named": true
       },
       {
+        "type": "interface_type",
+        "named": true
+      },
+      {
         "type": "literal",
         "named": true
       },
@@ -722,6 +726,10 @@
             "named": true
           },
           {
+            "type": "interface_type",
+            "named": true
+          },
+          {
             "type": "literal",
             "named": true
           },
@@ -1085,6 +1093,10 @@
           },
           {
             "type": "index_expression",
+            "named": true
+          },
+          {
+            "type": "interface_type",
             "named": true
           },
           {
@@ -1696,6 +1708,10 @@
             "named": true
           },
           {
+            "type": "interface_type",
+            "named": true
+          },
+          {
             "type": "literal",
             "named": true
           },
@@ -1775,6 +1791,22 @@
         "types": [
           {
             "type": "_expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "interface_type",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "block",
             "named": true
           }
         ]
@@ -1873,6 +1905,10 @@
           },
           {
             "type": "index_expression",
+            "named": true
+          },
+          {
+            "type": "interface_type",
             "named": true
           },
           {
@@ -2038,6 +2074,10 @@
             "named": true
           },
           {
+            "type": "interface_type",
+            "named": true
+          },
+          {
             "type": "literal",
             "named": true
           },
@@ -2107,6 +2147,16 @@
         "types": [
           {
             "type": "block",
+            "named": true
+          }
+        ]
+      },
+      "interface": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "_expression",
             "named": true
           }
         ]
@@ -3377,7 +3427,15 @@
     "named": false
   },
   {
+    "type": "implements",
+    "named": false
+  },
+  {
     "type": "in",
+    "named": false
+  },
+  {
+    "type": "interface",
     "named": false
   },
   {

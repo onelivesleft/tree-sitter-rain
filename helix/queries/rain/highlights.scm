@@ -34,7 +34,7 @@
 ["break" "continue" "defer"] @keyword.control
 ["and" "or" "in"] @keyword.operator
 ["struct" "union" "enum" "flags"] @keyword.storage.type
-["module" "program" "shader"] @keyword.storage.modifier
+["module" "program" "shader" "interface" "implements"] @keyword.storage.modifier
 
 [
   "#if" "#elseif" "#else" "#unroll" "#with" "#inline" "#for" "#signature" "#import"
