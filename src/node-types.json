@@ -1200,6 +1200,10 @@
         "required": false,
         "types": [
           {
+            "type": "enum_words",
+            "named": true
+          },
+          {
             "type": "identifier",
             "named": true
           }
@@ -1241,6 +1245,25 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "enum_words",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "array_type_prefix",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
     }
   },
   {

@@ -435,10 +435,13 @@ module.exports = grammar({
     enum_type: $ => prec.right(seq(
       'enum',
       optional('flags'),
-      optional(field('backing', $.identifier)),
+      // enum u8, or enum flags [4] u64 for more than 64 flags.
+      optional(field('backing', choice($.identifier, $.enum_words))),
       repeat($.directive),
       field('body', $.block),
     )),
+
+    enum_words: $ => seq($.array_type_prefix, $.identifier),
 
     module_type: $ => prec.right(seq(
       optional('#libc'),

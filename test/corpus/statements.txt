@@ -318,3 +318,25 @@ operator+ :: (a: Money, b: Money -> Money) { return ⟨a.cents + b.cents⟩ }
               (member_expression
                 (identifier)
                 (identifier)))))))))
+
+================================================================================
+A flags enum of more than 64 flags, in u64s
+================================================================================
+
+Set :: enum flags [2] u64 { MDI; TABLER }
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (constant_declaration
+    (identifier)
+    (enum_type
+      (enum_words
+        (array_type_prefix
+          (number))
+        (identifier))
+      (block
+        (expression_statement
+          (identifier))
+        (expression_statement
+          (identifier))))))

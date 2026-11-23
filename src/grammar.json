@@ -3686,8 +3686,17 @@
                 "type": "FIELD",
                 "name": "backing",
                 "content": {
-                  "type": "SYMBOL",
-                  "name": "identifier"
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "identifier"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "enum_words"
+                    }
+                  ]
                 }
               },
               {
@@ -3712,6 +3721,19 @@
           }
         ]
       }
+    },
+    "enum_words": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "array_type_prefix"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        }
+      ]
     },
     "module_type": {
       "type": "PREC_RIGHT",
